@@ -23,6 +23,93 @@ const roads = [  //Array of edges
   "m s"
 ]
 
+const mailRoute = [
+  "a",
+  "c",
+  "a",
+  "b",
+  "t",
+  "d",
+  "e",
+  "g",
+  "s",
+  "g",
+  "f",
+  "m",
+  "p"
+];
+
+//Utility function for picking random element from array.
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
+
+//Utility function for finding a route from one point to another through the graph.
+//Todo:  Find a better algorithm?
+function findRoute(graph, from, to) {
+  let work = [{at: from, route: []}];
+  for(let i = 0; i < work.length; i++){
+    let {at, route} = work[i];
+    for(let place of graph[at]) {
+      if(place == to) return route.concat(place);
+      if(!work.some(w => w.at == place)) {
+        work.push({at: place, route: route.concat(place)});
+      }
+    }
+  }
+}
+
+/**
+ * 
+ * @param {*} state A VillageState object.
+ * @returns A randomly chosen direction from the options available at the current node.
+ * This robot solves the problem by selecting nodes at random to travel to.  While this
+ * is guaranteed to work, it represents the worst possible option in terms of efficiency.
+ */
+function randomRobot(state) {
+  return {direction: randomPick(roadGraph[state.place])};
+}
+
+/**
+ * 
+ * @param {*} state A VillageState object
+ * @param {*} memory An array representing a route that passes through each node in the graph.
+ * @returns The next node in the mailRoute array. 
+ * This robot circles a specified route that visits each node in the graph.  This robot solves 
+ * the problem in a maximum of 26 turns. Compare with the randomRobot above.
+ */
+function routeRobot(state, memory) {
+  if(memory == undefined || memory.length == 0) {
+    memory = mailRoute;
+  }
+  return {direction: memory[0], memory: memory.slice(1)};
+}
+
+/**
+ * 
+ * @param {*} param0 The current location of the robot and the list of packages to be delivered.
+ * @param {*} route The list of nodes to visit.
+ * @returns The next node to visit and the updated route information
+ * This robot uses the findRoute function to map its route based on the origin and destination nodes of the 
+ * next package to be delivered.
+ * Efficiency is better on average than the routeRobot (Run to compare).
+ * The improvement here would be to find a better algorithm for generating a route.
+ * Going further, more improvements can be made by sorting the packages in an order such that the number
+ * of repeat visits to any node is minimized.
+ */
+function searchRobot({place, parcels}, route) {
+  if (route == undefined || route.length == 0) {
+    let parcel = parcels[0];
+    if(parcel.place != place) {
+      route = findRoute(roadGraph, place, parcel.place);
+    } else {
+      route = findRoute(roadGraph, place, parcel.address);
+    }
+  }
+  return {direction: route[0], memory: route.slice(1)};
+}
+
 /**
  * 
  * @param {*} roads- Array of edges in format "a b"
@@ -47,6 +134,7 @@ function buildGraph(roads) {
 }
 
 const roadGraph = buildGraph(roads);  //Now we have a graph built from the edges.
+console.log(roadGraph);
 
 /**
  * Key point from chapter:  It is not always necessary or desirable to turn everything into an object.  
@@ -58,7 +146,7 @@ class VillageState {
     this.place = place;
     this.parcels = parcels;
   }
-  random(parcelCount = 5) { //Method for generating a random starting VillageState
+  static random(parcelCount = 5) { //Method for generating a random starting VillageState
     let parcels = [];
     for (let i = 0; i < parcelCount; i++) {
       let address = randomPick(Object.keys(roadGraph)); 
@@ -66,7 +154,7 @@ class VillageState {
       do {
         place = randomPick(Object.keys(roadGraph));
       } while (place == address); //Loop while origin matches destination
-      parcels.push(place, address);
+      parcels.push({place, address});
     }
     return new VillageState("p", parcels);
   }
@@ -90,6 +178,7 @@ class VillageState {
  */
 
 function runRobot(state, robot, memory) {
+  
   for (let turn = 0;; turn++) {
     if(state.parcels.length == 0) { //All packages delivered
       console.log(`Done in ${turn} turns.`);
@@ -102,5 +191,12 @@ function runRobot(state, robot, memory) {
   }
 }
 
+let rndVillage = VillageState.random();
+runRobot(rndVillage, randomRobot);
+runRobot(rndVillage, routeRobot);
+runRobot(rndVillage, searchRobot);
 
 
+/**
+ * My key takeaway:  Persistent data structures can be used to reduce code complexity.
+ */
