@@ -13,8 +13,8 @@ Checked out a new branch to correct the error, but no changes were made other th
 
 const fizzbuzz = () => {
   for (let i = 1; i < 101; i++) {
-    if (i % 3 === 0 && i % 5 !== 0) console.log("fizz");
-    else if (i % 5 === 0 && i % 3 !== 0) console.log("buzz");
+    if (i % 3 === 0) console.log("fizz");  //Yeah, I don't know why I added the extra bit in these if statements either.
+    else if (i % 5 === 0) console.log("buzz");  
     else if (i % 3 === 0 && i % 5 === 0) console.log("fizzbuzz");
     else console.log(i);
   }
