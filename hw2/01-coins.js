@@ -1,7 +1,27 @@
 /** Exercise 01 - Coins **/
 
 const calculateChange = (input) => {
-  //Your code here
+  let total = input * 100;  //Convert dollar amount to cents.
+  let dollars, quarters, dimes, nickels, pennies; 
+  let drawer = [1, 5, 10, 25, 100];
+  while (total > 0) {
+    let coin = drawer.pop();  //Get the next denomination of coin.
+    let amt = Math.floor(total / coin); //Get the # of coins of this denomination needed.
+    total -= amt * coin; //Subtract value of coins from total.
+    switch (coin) {  //For formatting the results into a string literal.
+      case 100: dollars = amt;
+                break;
+      case 25:  quarters = amt;
+                break;
+      case 10:  dimes = amt;
+                break;
+      case 5:   nickels = amt;
+                break;
+      default:  pennies = amt;
+                break;          
+    }
+  }
+  return `$${input} ==> ${dollars} dollars, ${quarters} quarters, ${dimes} dimes, ${nickels} nickels, ${pennies} pennies.`;
 };
 
 // Sample Test Cases
