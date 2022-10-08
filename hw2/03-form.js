@@ -6,7 +6,7 @@ function resetForm() {
 }
 
 /**
- * 
+ *
  * @param {*} field String indicating which field is missing - used to set document focus and inform alert msg
  * Displays an alert indicating that a required field cannot be left blank.
  */
@@ -18,22 +18,22 @@ function inputAlert(field) {
 //On form submit, check required fields for values. If empty, call inputAlert and exit.
 //Otherwise, get field values and insert them into string literal.
 //Print to console.
-document.getElementById("hw3form").addEventListener('submit', (e) => {
+document.getElementById("hw3form").addEventListener("submit", (e) => {
   e.preventDefault();
   let name = e.target.name.value;
-  if(name == "") {
+  if (name == "") {
     inputAlert("name");
     return;
   }
   let email = e.target.email.value;
-  if(email == ""){
+  if (email == "") {
     inputAlert("email");
     return;
   }
   let msg = e.target.message.value;
   let chk = e.target.newsletter.checked;
-  if(chk === true) {
-    news = "Yes, I would like to join the newsletter."
+  if (chk === true) {
+    news = "Yes, I would like to join the newsletter.";
   } else {
     news = "No, thank you.";
   }
@@ -43,8 +43,5 @@ document.getElementById("hw3form").addEventListener('submit', (e) => {
   Feedback:  ${msg}
   Newsletter: ${news}`;
 
-    console.log(output);
-
-    
+  console.log(output);
 });
-
