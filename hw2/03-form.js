@@ -1,13 +1,23 @@
-
+/**
+ * Clear form when reset button is clicked.
+ */
 function resetForm() {
   document.getElementById("hw3form").reset();
 }
 
+/**
+ * 
+ * @param {*} field String indicating which field is missing - used to set document focus and inform alert msg
+ * Displays an alert indicating that a required field cannot be left blank.
+ */
 function inputAlert(field) {
   alert(`${field} is a required field and may not be left blank!`);
   document.getElementById(field).focus();
 }
 
+//On form submit, check required fields for values. If empty, call inputAlert and exit.
+//Otherwise, get field values and insert them into string literal.
+//Print to console.
 document.getElementById("hw3form").addEventListener('submit', (e) => {
   e.preventDefault();
   let name = e.target.name.value;
@@ -38,35 +48,3 @@ document.getElementById("hw3form").addEventListener('submit', (e) => {
     
 });
 
-
-
-/*
-document.getElementById("go").addEventListener('click', () => {
-  console.log("Hello");
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let msg = document.getElementById("message").value;
-  let news;
-  if(document.getElementById("newsletter").checked === true) {
-    news = "Yes, I would like to join the newsletter."
-  } else {
-    news = "No, thank you.";
-  }
-
-  let output = `=============Form Submission=============
-    Name:  ${name}
-    Email: ${email}
-    Feedback:  ${msg}
-    Newsletter: ${news}`;
-
-    console.log(output);
-
-    getElementById("hw3form")
-})
- function submitform() {
-  if(document.hw3form.onsubmit()) {
-    document.hw3form.submit();
-  }
-}   
-
-*/
