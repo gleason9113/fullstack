@@ -21,9 +21,7 @@ function reverseMe() {
   let original = document.getElementById("input").value;
   let value = reverseNum(original);
   let result = document.getElementById("resultbox");
-  console.log(result);
   if (result == undefined || result == null) {
-    console.log("New resultbox created!")
     result = document.createElement("resultbox");
     result.id = "resultbox"
     result.classList.add("text-center");

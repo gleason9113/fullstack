@@ -52,7 +52,7 @@ function parseData() {
 
       countries = countries.sort((a, b) => a.localeCompare(b)); //Sort country list alphabetically
       for (let i = 0; i < countries.length; i++) {
-        //Iteate through countries and append each to the list element.
+        //Iterate through countries and append each to the list element.
         console.log(countries[i]);
         let element = document.createElement("li");
         element.innerText = countries[i];
