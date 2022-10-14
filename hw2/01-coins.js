@@ -15,45 +15,45 @@ const calculateChange = (input) => {
       coin //For formatting the results into a string literal.
     ) {
       case 100:
-        if(amt === 0){
+        if (amt === 0) {
           dollars = "";
-        } else if(amt === 1) {
+        } else if (amt === 1) {
           dollars = amt + " dollar, ";
         } else {
           dollars = amt + " dollars, ";
         }
         break;
       case 25:
-        if(amt === 0){
+        if (amt === 0) {
           quarters = "";
-        } else if(amt === 1) {
+        } else if (amt === 1) {
           quarters = amt + " quarter, ";
         } else {
           quarters = amt + " quarters, ";
         }
         break;
       case 10:
-        if(amt === 0){
+        if (amt === 0) {
           dimes = "";
-        } else if(amt === 1) {
+        } else if (amt === 1) {
           dimes = amt + " dime, ";
         } else {
           dimes = amt + " dimes, ";
         }
         break;
       case 5:
-        if(amt === 0){
+        if (amt === 0) {
           nickels = "";
-        } else if(amt === 1) {
+        } else if (amt === 1) {
           nickels = amt + " nickel, ";
         } else {
           dollars = amt + " nickels, ";
         }
         break;
       default:
-        if(amt === 0){
+        if (amt === 0) {
           pennies = "";
-        } else if(amt === 1) {
+        } else if (amt === 1) {
           pennies = amt + " penny.";
         } else {
           pennies = amt + " pennies.";

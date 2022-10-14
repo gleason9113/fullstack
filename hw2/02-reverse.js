@@ -7,12 +7,13 @@
  * Input is validated for type and length, then reversed.
  */
 function reverseNum(input) {
-  if(input == "") {
+  if (input == "") {
     return `Not a number! ==> Input must be an 8-digit number!`;
   }
   let validNumTest = /^[0-9]{8}$/;
-  if (!validNumTest.test(input)) return  `${input} ==> Error: Input must be an 8-digit number!`;
-  let reversed = input.split("").reverse().join("")
+  if (!validNumTest.test(input))
+    return `${input} ==> Error: Input must be an 8-digit number!`;
+  let reversed = input.split("").reverse().join("");
   return `${input} ==> ${reversed}`;
 }
 
@@ -26,12 +27,11 @@ function reverseMe() {
   let result = document.getElementById("resultbox");
   if (result == undefined || result == null) {
     result = document.createElement("resultbox");
-    result.id = "resultbox"
+    result.id = "resultbox";
     result.classList.add("text-center");
     result.innerHTML = `<h6 class="mt-2 mb-4 mx-auto">${value}</h1>`;
     document.getElementById("main").appendChild(result);
   } else {
     result.innerHTML = `<h6 class="mt-2 mb-4 mx-auto">${value}</h1>`;
   }
-  
 }
