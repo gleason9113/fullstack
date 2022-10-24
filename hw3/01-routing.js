@@ -79,8 +79,8 @@ const server = http.createServer((req, res) => {
       } else {
         res.write(`no`);
       }
-      
-      console.log(req); //I can see the cookie in here- it just appears to be buried in a way I can't access.
+      let header = req.getHeader('Cookie'); //Tried this from recommendation- req.getHeader is not a function?
+      console.log(header); 
       res.end();
       break;
     default:
