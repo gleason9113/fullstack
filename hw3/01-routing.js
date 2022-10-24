@@ -66,8 +66,21 @@ const server = http.createServer((req, res) => {
       res.end();
       break;
     case "/check-cookies": //No idea how to check for cookies w/o Express?
-      res.write(`In Progress`);
-      console.log();
+    /*
+      let check = req.cookie.hello; //This crashes the server, obv. 
+      if(check) {
+        res.write(`yes`);
+      } else {
+        res.write(`no`);
+      }
+*/
+      if(req.cookies) { //This doesn't crash the server, but also doesn't detect the cookie.
+        res.write(`yes`);
+      } else {
+        res.write(`no`);
+      }
+      
+      console.log(req); //I can see the cookie in here- it just appears to be buried in a way I can't access.
       res.end();
       break;
     default:
