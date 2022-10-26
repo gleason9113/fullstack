@@ -22,6 +22,7 @@ const server = http.createServer((req, res) => {
     return result;
   };
 
+  //Handling routing with switch statement- I think this is more readable than an extended if/else structure.
   switch (req.url) {
     case "/":
       let routeResults = getRoutes();
@@ -65,22 +66,12 @@ const server = http.createServer((req, res) => {
       res.write("cookies... yumm");
       res.end();
       break;
-    case "/check-cookies": //No idea how to check for cookies w/o Express?
-    /*
-      let check = req.cookie.hello; //This crashes the server, obv. 
-      if(check) {
+    case "/check-cookies":
+      if (req.headers.cookie === "hello=world") {
         res.write(`yes`);
       } else {
         res.write(`no`);
       }
-*/
-      if(req.cookies) { //This doesn't crash the server, but also doesn't detect the cookie.
-        res.write(`yes`);
-      } else {
-        res.write(`no`);
-      }
-      let header = req.getHeader('Cookie'); //Tried this from recommendation- req.getHeader is not a function?
-      console.log(header); 
       res.end();
       break;
     default:
