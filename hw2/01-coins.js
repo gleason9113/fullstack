@@ -62,6 +62,7 @@ const calculateChange = (input) => {
     }
   }
   return `$${input} ==> ${dollars} ${quarters} ${dimes} ${nickels} ${pennies}`;
+
 };
 
 // Sample Test Cases
