@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "axios": "^0.21.1",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
+    "express-session": "^1.17.3",
+    "memorystore": "^1.6.7",
     "pug": "^3.0.2"
   }
 }
